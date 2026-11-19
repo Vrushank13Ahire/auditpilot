@@ -59,6 +59,16 @@ def test_policy_agent_tools_key_and_citation_rule():
     assert "clause" in policy.instruction.lower() and "do not raise it" in policy.instruction.lower()
 
 
+def test_risk_agent_structured_output_and_code_scoring():
+    agents = _by_name()
+    assessor = agents["risk_assessor"]
+    assert assessor.output_schema.__name__ == "RiskAssessment"
+    assert not _tool_names(assessor)                       # ADK: an agent with output_schema cannot use tools
+    assert agents["risk_scorer"].name == "risk_scorer"      # plain-code step computes score and amount
+    names = [a.name for a in agents["risk_agent"].sub_agents]
+    assert names == ["risk_assessor", "risk_scorer"]
+
+
 def test_specialists_run_in_parallel_after_intake():
     pipeline = _by_name()["audit_pipeline"]
     names = [type(a).__name__ for a in pipeline.sub_agents]

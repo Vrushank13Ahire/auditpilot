@@ -6,6 +6,7 @@ from auditpilot.agents.anomaly import anomaly_agent
 from auditpilot.agents.intake import intake_agent
 from auditpilot.agents.policy import policy_agent
 from auditpilot.agents.ratio import ratio_agent
+from auditpilot.agents.risk import risk_agent
 from auditpilot.agents.vendor import vendor_agent
 from auditpilot.gates import halt_if_failed
 
@@ -19,7 +20,7 @@ specialists = ParallelAgent(
 audit_pipeline = SequentialAgent(
     name="audit_pipeline",
     description="Runs a full audit: intake first, then the later stages in a fixed order.",
-    sub_agents=[intake_agent, specialists],
+    sub_agents=[intake_agent, specialists, risk_agent],
 )
 
 root_agent = LlmAgent(
