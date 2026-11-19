@@ -1,0 +1,41 @@
+employee_id,name,department,role,bank_account
+E001,Aarav Sharma,Procurement,Clerk,176448062059
+E002,Vivaan Joshi,Operations,Clerk,777751845319
+E003,Aditya Menon,Sales,Clerk,864854420580
+E004,Arjun Verma,IT,Clerk,882617730948
+E005,Rohan Mehta,HR,Clerk,777134405176
+E006,Kabir Pillai,Admin,Clerk,973943930471
+E007,Ishaan Iyer,Finance,Clerk,516432569418
+E008,Rahul Shah,Procurement,Clerk,670378488382
+E009,Karan Desai,Operations,Clerk,366181807776
+E010,Siddharth Nair,Sales,Clerk,572754550121
+E011,Ananya Gupta,IT,Clerk,466485075655
+E012,Diya Naidu,HR,Clerk,157360349224
+E013,Kavya Reddy,Admin,Clerk,980280829246
+E014,Meera Singh,Finance,Clerk,255796444831
+E015,Priya Rao,Procurement,Clerk,401077647195
+E016,Neha Patil,Operations,Clerk,914644132366
+E017,Pooja Banerjee,Sales,Accountant,639031393946
+E018,Riya Bose,IT,Accountant,527927277472
+E019,Sneha Kulkarni,HR,Accountant,104914727385
+E020,Tanvi Chatterjee,Admin,Accountant,514807476436
+E021,Aarav Verma,Finance,Accountant,250660747014
+E022,Vivaan Mehta,Procurement,Accountant,236161157129
+E023,Aditya Pillai,Operations,Accountant,954365201944
+E024,Arjun Iyer,Sales,Accountant,570024644915
+E025,Rohan Shah,IT,Accountant,548293558420
+E026,Kabir Desai,HR,Accountant,480851353166
+E027,Ishaan Nair,Admin,Manager,222677973169
+E028,Rahul Gupta,Finance,Manager,922015533848
+E029,Karan Naidu,Procurement,Manager,932962659299
+E030,Siddharth Reddy,Operations,Manager,215024991807
+E031,Ananya Singh,Sales,Manager,882815430736
+E032,Diya Rao,IT,Manager,438077320992
+E033,Kavya Patil,HR,Manager,110881713578
+E034,Meera Banerjee,Admin,Manager,112397394541
+E035,Priya Bose,Finance,Manager,901221069125
+E036,Neha Kulkarni,Procurement,Manager,967541880707
+E037,Pooja Chatterjee,Operations,Finance Head,814159039314
+E038,Riya Sharma,Sales,Finance Head,563952994055
+E039,Sneha Joshi,IT,Finance Head,268171740915
+E040,Tanvi Menon,HR,Finance Head,297844678061
