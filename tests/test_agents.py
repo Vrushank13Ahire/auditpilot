@@ -52,6 +52,13 @@ def test_specialists_least_privilege_and_keys():
     assert len(keys) == len(set(keys)), "output_key clash"
 
 
+def test_policy_agent_tools_key_and_citation_rule():
+    policy = _by_name()["policy_agent"]
+    assert _tool_names(policy) == {"check_approval_limits", "retrieve_policy"}
+    assert policy.output_key == "policy_findings"
+    assert "clause" in policy.instruction.lower() and "do not raise it" in policy.instruction.lower()
+
+
 def test_specialists_run_in_parallel_after_intake():
     pipeline = _by_name()["audit_pipeline"]
     names = [type(a).__name__ for a in pipeline.sub_agents]

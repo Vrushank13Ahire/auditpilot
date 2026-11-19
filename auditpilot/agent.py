@@ -4,6 +4,7 @@ from google.adk.agents import LlmAgent, ParallelAgent, SequentialAgent
 from auditpilot.agents._common import MODEL
 from auditpilot.agents.anomaly import anomaly_agent
 from auditpilot.agents.intake import intake_agent
+from auditpilot.agents.policy import policy_agent
 from auditpilot.agents.ratio import ratio_agent
 from auditpilot.agents.vendor import vendor_agent
 from auditpilot.gates import halt_if_failed
@@ -11,7 +12,7 @@ from auditpilot.gates import halt_if_failed
 specialists = ParallelAgent(
     name="specialists",
     description="Runs the specialist agents at the same time; each writes its own findings key to state.",
-    sub_agents=[anomaly_agent, vendor_agent, ratio_agent],
+    sub_agents=[anomaly_agent, vendor_agent, ratio_agent, policy_agent],
     before_agent_callback=halt_if_failed,
 )
 
