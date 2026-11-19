@@ -1,0 +1,6 @@
+google-adk
+pandas
+numpy
+pydantic
+scikit-learn
+pytest
