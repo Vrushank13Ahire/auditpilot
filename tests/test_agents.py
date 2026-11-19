@@ -74,3 +74,41 @@ def test_specialists_run_in_parallel_after_intake():
     names = [type(a).__name__ for a in pipeline.sub_agents]
     assert names[:2] == ["LlmAgent", "ParallelAgent"]
     assert {a.name for a in _by_name()["specialists"].sub_agents} >= {"anomaly_agent", "vendor_agent", "ratio_agent"}
+
+
+def test_skeptic_is_a_bounded_loop_with_a_code_gate_and_finalizer():
+    agents = _by_name()
+    loop = agents["skeptic_loop"]
+    assert type(loop).__name__ == "LoopAgent" and loop.max_iterations == 3
+    assert [a.name for a in loop.sub_agents] == ["skeptic_agent", "skeptic_gate"]
+    skeptic = agents["skeptic_agent"]
+    assert _tool_names(skeptic) == {"verify_entry_ids", "record_verdicts"}
+    assert [a.name for a in agents["skeptic_stage"].sub_agents] == ["skeptic_loop", "skeptic_finalizer"]
+
+
+def test_report_agent_can_only_write_the_memo_and_root_owns_sign_off():
+    agents = _by_name()
+    assert _tool_names(agents["report_agent"]) == {"write_audit_memo"}
+    assert "sign_off" not in _tool_names(agents["report_agent"])               # the report agent can never self-approve
+    assert _tool_names(agent_module.root_agent) == {"sign_off"}
+    assert "human" in agent_module.root_agent.instruction.lower()
+
+
+def test_pipeline_order_is_the_one_in_the_pdf():
+    names = [a.name for a in _by_name()["audit_pipeline"].sub_agents]
+    assert names == ["intake_agent", "specialists", "risk_agent", "skeptic_stage", "report_agent"]
+    assert len({a.name for a in _walk(agent_module.root_agent)}) == len(list(_walk(agent_module.root_agent)))
+
+
+def test_every_llm_agent_has_untrusted_text_rule_masking_and_trail_callbacks():
+    for a in _walk(agent_module.root_agent):
+        if type(a).__name__ != "LlmAgent" or a.name == "audit_lead":
+            continue
+        assert "untrusted" in a.instruction.lower(), a.name
+        assert getattr(a, "before_model_callback", None) and getattr(a, "after_tool_callback", None), a.name
+
+
+def test_stages_after_intake_are_gated_on_intake_success():
+    agents = _by_name()
+    for name in ("specialists", "risk_agent", "skeptic_stage", "report_agent"):
+        assert getattr(agents[name], "before_agent_callback", None) is not None, name
