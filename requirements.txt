@@ -1,7 +1,6 @@
 google-adk
 pandas
-numpy
 pydantic
-scikit-learn
 pytest
-python-dotenv
+scikit-learn
+
